@@ -9,13 +9,13 @@ function App() {
 
   const [startIndex, setStartIndex] = useState(0);
 
-  // Create items
+  // Create list items
   const items = Array.from(
     { length: totalItems },
     (_, index) => `Item ${index}`
   );
 
-  // Handle scroll
+  // Scroll handler
   const handleScroll = () => {
     const scrollTop = scrollRef.current.scrollTop;
 
@@ -24,7 +24,7 @@ function App() {
     setStartIndex(newStartIndex);
   };
 
-  // Visible items
+  // Visible items only
   const visibleItems = items.slice(
     startIndex,
     startIndex + visibleItemsCount
@@ -49,18 +49,18 @@ function App() {
           const actualIndex = startIndex + index;
 
           return (
-            <p
+            <h2
               key={actualIndex}
               style={{
                 height: `${itemHeight}px`,
-                margin: 0,
+                margin: "0px",
                 position: "absolute",
                 top: `${actualIndex * itemHeight}px`,
                 width: "100%",
               }}
             >
               {item}
-            </p>
+            </h2>
           );
         })}
       </div>
