@@ -12,10 +12,10 @@ function App() {
   // Create items
   const items = Array.from(
     { length: totalItems },
-    (_, index) => `Item ${index + 1}`
+    (_, index) => `Item ${index}`
   );
 
-  // Handle Scroll
+  // Handle scroll
   const handleScroll = () => {
     const scrollTop = scrollRef.current.scrollTop;
 
@@ -49,7 +49,7 @@ function App() {
           const actualIndex = startIndex + index;
 
           return (
-            <h2
+            <p
               key={actualIndex}
               style={{
                 height: `${itemHeight}px`,
@@ -60,7 +60,7 @@ function App() {
               }}
             >
               {item}
-            </h2>
+            </p>
           );
         })}
       </div>
