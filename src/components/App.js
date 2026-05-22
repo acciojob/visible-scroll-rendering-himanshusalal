@@ -12,7 +12,10 @@ function App() {
   // Create items
   const items = Array.from(
     { length: totalItems },
-    () => "Lorem ipsum dolor sit amet."
+    (_, index) => ({
+      title: `Item ${index}`,
+      description: "Lorem ipsum dolor sit amet.",
+    })
   );
 
   // Handle scroll
@@ -59,7 +62,9 @@ function App() {
                 width: "100%",
               }}
             >
-              <p>{item}</p>
+              {item.title}
+
+              <p>{item.description}</p>
             </h2>
           );
         })}
