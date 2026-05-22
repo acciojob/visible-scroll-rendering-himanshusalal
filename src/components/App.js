@@ -3,32 +3,32 @@ import React, { useRef, useState } from "react";
 function App() {
   const totalItems = 1000;
   const itemHeight = 50;
-  const containerHeight = 500;
+  const visibleItemsCount = 10;
 
   const scrollRef = useRef(null);
 
-  const [scrollTop, setScrollTop] = useState(0);
+  const [startIndex, setStartIndex] = useState(0);
 
-  // Total visible items
-  const visibleCount = Math.ceil(containerHeight / itemHeight);
-
-  // Start and End indexes
-  const startIndex = Math.floor(scrollTop / itemHeight);
-  const endIndex = startIndex + visibleCount + 2;
-
-  // Large list
+  // Create items
   const items = Array.from(
     { length: totalItems },
     (_, index) => `Item ${index + 1}`
   );
 
-  // Scroll handler
+  // Handle Scroll
   const handleScroll = () => {
-    setScrollTop(scrollRef.current.scrollTop);
+    const scrollTop = scrollRef.current.scrollTop;
+
+    const newStartIndex = Math.floor(scrollTop / itemHeight);
+
+    setStartIndex(newStartIndex);
   };
 
-  // Visible items only
-  const visibleItems = items.slice(startIndex, endIndex);
+  // Visible items
+  const visibleItems = items.slice(
+    startIndex,
+    startIndex + visibleItemsCount
+  );
 
   return (
     <div
@@ -36,12 +36,9 @@ function App() {
       onScroll={handleScroll}
       style={{
         height: "500px",
-        overflowY: "auto",
-        border: "2px solid black",
-        position: "relative",
+        overflow: "auto",
       }}
     >
-      {/* Total height */}
       <div
         style={{
           height: `${totalItems * itemHeight}px`,
@@ -52,23 +49,18 @@ function App() {
           const actualIndex = startIndex + index;
 
           return (
-            <div
+            <h2
               key={actualIndex}
               style={{
                 height: `${itemHeight}px`,
+                margin: 0,
                 position: "absolute",
                 top: `${actualIndex * itemHeight}px`,
-                left: 0,
-                right: 0,
-                borderBottom: "1px solid gray",
-                display: "flex",
-                alignItems: "center",
-                paddingLeft: "10px",
-                background: "white",
+                width: "100%",
               }}
             >
               {item}
-            </div>
+            </h2>
           );
         })}
       </div>
