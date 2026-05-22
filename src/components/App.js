@@ -9,11 +9,13 @@ function App() {
 
   const [startIndex, setStartIndex] = useState(0);
 
+  // Create items
   const items = Array.from(
     { length: totalItems },
-    (_, index) => `Item ${index}`
+    () => "Lorem ipsum dolor sit amet."
   );
 
+  // Handle scroll
   const handleScroll = () => {
     const scrollTop = scrollRef.current.scrollTop;
 
@@ -22,6 +24,7 @@ function App() {
     setStartIndex(newStartIndex);
   };
 
+  // Visible items only
   const visibleItems = items.slice(
     startIndex,
     startIndex + visibleItemsCount
